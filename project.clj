@@ -9,6 +9,7 @@
                  [org.clojure/clojurescript "1.10.597"]
                  [org.clojure/core.async "0.7.559"
                   :exclusions [org.clojure/tools.reader]]
+                 [com.cognitect/transit-cljs "0.8.256"]
                  [reagent "0.9.1"]
                  [keechma "0.3.14"
                   :exclusions [cljsjs/react-with-addons
