@@ -40,6 +40,16 @@
     (enable-console-print!)
     (println "dev mode")))
 
+;; ## Shadow Entry points
+
+(defn ^:export init []
+  (start!))
+
+(defn stop! []
+  (when-let [current @running-app]
+    (app-state/stop! current)
+    (reset! current nil)))
+
 ;; ## Main
 
 (defn ^:export main
