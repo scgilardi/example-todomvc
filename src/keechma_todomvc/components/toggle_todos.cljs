@@ -1,6 +1,7 @@
 (ns keechma-todomvc.components.toggle-todos
   "# Toggle Todos component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp sub>]]))
+  (:require [keechma-todomvc.ui :refer [<checked <cmd <comp sub>]
+             :refer-macros [evt>]]))
 
 (defn render
   "## Renders a checkbox element
@@ -16,7 +17,7 @@
   [:<>
    [:input#toggle-all.toggle-all
     {:type :checkbox
-     :on-change #(<cmd ctx :toggle-all (.. % -target -checked))
+     :on-change (evt> event (<cmd ctx :toggle-all (<checked event)))
      :checked (not (sub> ctx :has-todos-by-status? :active))}]
    [:label {:for :toggle-all} "Mark all as completed"]])
 

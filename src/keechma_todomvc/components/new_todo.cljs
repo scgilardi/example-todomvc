@@ -1,7 +1,7 @@
 (ns keechma-todomvc.components.new-todo
   "# New Todo component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp]]
-            [keechma-todomvc.util :refer [is-enter?]]
+  (:require [keechma-todomvc.ui :refer [<cmd <comp on-key> on-value>]
+             :refer-macros [evt>]]
             [reagent.core :as reagent]))
 
 (defn form-2-render
@@ -27,10 +27,9 @@
        {:placeholder "What needs to be done?"
         :value @new-title
         :auto-focus true
-        :on-change #(reset! new-title (.. % -target -value))
-        :on-key-down #(when (is-enter? (.-keyCode %))
-                        (<cmd ctx :create-todo @new-title)
-                        (reset! new-title ""))}])))
+        :on-key-down (on-key> :enter (evt> (<cmd ctx :create-todo @new-title)
+                                           (reset! new-title "")))
+        :on-change (on-value> new-title)}])))
 
 (def component
   (<comp :renderer form-2-render))

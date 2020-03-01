@@ -1,6 +1,7 @@
 (ns keechma-todomvc.components.todo-item
   "# Todo Item component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp comp>]]))
+  (:require [keechma-todomvc.ui :refer [<cmd <comp comp>]
+             :refer-macros [evt>]]))
 
 (defn render
   "## Renders a todo list item
@@ -27,12 +28,12 @@ If the item is currently being edited, overlays a `todo-edit` component.
   [ctx todo is-editing?]
   [:li {:class [(when is-editing? :editing)
                 (when (:completed todo) :completed)]}
-   [:div.view {:on-double-click #(<cmd ctx :start-edit todo)}
+   [:div.view {:on-double-click (evt> (<cmd ctx :start-edit todo))}
     [:input.toggle {:type :checkbox
                     :checked (:completed todo)
-                    :on-change #(<cmd ctx :toggle-todo todo)}]
+                    :on-change (evt> (<cmd ctx :toggle-todo todo))}]
     [:label (:title todo)]
-    [:button.destroy {:on-click #(<cmd ctx :delete-todo todo)}]]
+    [:button.destroy {:on-click (evt> (<cmd ctx :delete-todo todo))}]]
    (when is-editing?
      [comp> ctx :todo-edit])])
 
