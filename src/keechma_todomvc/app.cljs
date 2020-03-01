@@ -1,7 +1,7 @@
 (ns keechma-todomvc.app
   "# Keechma TodoMVC App"
   (:require [keechma-todomvc.components :as components]
-            [keechma-todomvc.controllers.todos :as todos]
+            [keechma-todomvc.controllers :as controllers]
             [keechma-todomvc.subscriptions :as subscriptions]
             [keechma.app-state :as app-state]))
 
@@ -12,7 +12,7 @@
 (def app-definition
   "Pulls the app together."
   {:routes [[":status" {:status "all"}]]
-   :controllers {:todos (todos/->Controller)}
+   :controllers controllers/controllers
    :components components/system
    :subscriptions subscriptions/subscriptions
    :html-element (.getElementById js/document "app")})

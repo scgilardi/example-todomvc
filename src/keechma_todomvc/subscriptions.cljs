@@ -45,8 +45,9 @@
   (reaction
    (todo/edit-todo @app-db)))
 
-(def subscriptions {:todos-by-status todos-by-status
-                    :count-todos-by-status count-todos-by-status
-                    :has-todos-by-status? has-todos-by-status?
-                    :has-todos? has-todos?
-                    :edit-todo edit-todo})
+(def subscriptions
+  {:todos-by-status todos-by-status
+   :count-todos-by-status count-todos-by-status
+   :has-todos-by-status? has-todos-by-status?
+   :has-todos? has-todos?
+   :edit-todo edit-todo})
