@@ -1,6 +1,11 @@
 (ns keechma-todomvc.components.footer
   "# Footer component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp route> sub> <url]]))
+  (:require [clojure.string :as str]
+            [keechma-todomvc.ui :refer [<cmd <comp map> route> sub> <url]
+             :refer-macros [evt>]]))
+
+(def statuses ^{:map>/key-fn keyword}
+  ["all" "active" "completed"])
 
 (defn render
   "## Renders the Footer
@@ -22,24 +27,21 @@
 - `:has-todos-by-status?` returns `true` if there are any `todos` with
   a `status`."
   [ctx]
-  (let [route-status (keyword (route> ctx :status))
-        filter-item (fn [status label]
-                      [:li>a
-                       {:href (<url ctx :status (name status))
-                        :class (when (= status route-status) "selected")}
-                       label])
-        active-count (sub> ctx :count-todos-by-status :active)
-        count-label (str " item" ({1 ""} active-count "s") " left")]
+  (let [active-count (sub> ctx :count-todos-by-status :active)
+        count-label (str " item" ({1 ""} active-count "s") " left")
+        filter-item (fn [status]
+                      (let [href (<url ctx :status status)
+                            class (when (= (route> ctx :status) status)
+                                    :selected)
+                            label (str/capitalize status)]
+                        [:li>a {:href href :class class} label]))]
     [:footer.footer
      [:span.todo-count
       [:strong active-count] count-label]
-     [:ul.filters
-      (filter-item :all "All")
-      (filter-item :active "Active")
-      (filter-item :completed "Completed")]
+     [:ul.filters (map> filter-item statuses)]
      (when (sub> ctx :has-todos-by-status? :completed)
        [:button.clear-completed
-        {:on-click #(<cmd ctx :delete-completed)}
+        {:on-click (evt> (<cmd ctx :delete-completed))}
         "Clear completed"])]))
 
 (def component

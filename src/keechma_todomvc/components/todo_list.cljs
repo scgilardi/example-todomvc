@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.todo-list
   "# Todo List component"
-  (:require [keechma-todomvc.ui :refer [<comp comp> route> sub>]]))
+  (:require [keechma-todomvc.ui :refer [<comp comps> route> sub>]]))
 
 (defn render
   "## Renders a list of currently visible todos
@@ -19,11 +19,10 @@
 - `:edit-todo` returns the `todo` currently being edited, or nil"
   [ctx]
   (let [route-status (keyword (route> ctx :status))
-        is-editing? (fn [id] (= id (:id (sub> ctx :edit-todo))))
-        todo-item (fn [{id :id :as todo}]
-                    ^{:key id} [comp> ctx :todo-item todo (is-editing? id)])]
+        todos (sub> ctx :todos-by-status route-status)
+        >is-editing? #(= (:id %) (:id (sub> ctx :edit-todo)))]
     [:ul.todo-list
-     (doall (map todo-item (sub> ctx :todos-by-status route-status)))]))
+     (comps> ctx :todo-item todos >is-editing?)]))
 
 (def component
   (<comp :renderer render
