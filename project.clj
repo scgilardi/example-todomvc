@@ -15,7 +15,8 @@
                   :exclusions [cljsjs/react-with-addons
                                cljsjs/react-dom
                                cljsjs/react-dom-server]]
-                 [keechma/entitydb "0.1.6"]]
+                 [keechma/entitydb "0.1.6"]
+                 [sazhet "0.1.0-SNAPSHOT"]]
 
   :plugins [[lein-figwheel "0.5.19"]
             [lein-cljsbuild "1.1.7"

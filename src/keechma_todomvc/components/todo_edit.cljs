@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.todo-edit
   "# Todo Edit component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp sub> on-key> on-value>]
+  (:require [sazhet.ui :refer [<cmd <comp sub> on-key> on-value>]
              :refer-macros [evt>]]
             [reagent.core :as reagent]))
 

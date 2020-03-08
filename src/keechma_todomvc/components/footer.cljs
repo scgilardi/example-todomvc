@@ -1,7 +1,7 @@
 (ns keechma-todomvc.components.footer
   "# Footer component"
   (:require [clojure.string :as str]
-            [keechma-todomvc.ui :refer [<cmd <comp map> route> sub> <url]
+            [sazhet.ui :refer [<cmd <comp map> route> sub> <url]
              :refer-macros [evt>]]))
 
 (def statuses ^{:map>/key-fn keyword}

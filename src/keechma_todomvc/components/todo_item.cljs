@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.todo-item
   "# Todo Item component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp comp>]
+  (:require [sazhet.ui :refer [<cmd <comp comp>]
              :refer-macros [evt>]]))
 
 (defn render

@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.app
   "# Main app component"
-  (:require [keechma-todomvc.ui :refer [<comp comp> sub>]]))
+  (:require [sazhet.ui :refer [<comp comp> sub>]]))
 
 (defn render
   "## Renders the top level UI

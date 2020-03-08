@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.toggle-todos
   "# Toggle Todos component"
-  (:require [keechma-todomvc.ui :refer [<checked <cmd <comp sub>]
+  (:require [sazhet.ui :refer [<checked <cmd <comp sub>]
              :refer-macros [evt>]]))
 
 (defn render

@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.todo-list
   "# Todo List component"
-  (:require [keechma-todomvc.ui :refer [<comp comps> route> sub>]]))
+  (:require [sazhet.ui :refer [<comp comps> route> sub>]]))
 
 (defn render
   "## Renders a list of currently visible todos

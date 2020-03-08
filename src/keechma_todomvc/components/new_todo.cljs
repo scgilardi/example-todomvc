@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.new-todo
   "# New Todo component"
-  (:require [keechma-todomvc.ui :refer [<cmd <comp on-key> on-value>]
+  (:require [sazhet.ui :refer [<cmd <comp on-key> on-value>]
              :refer-macros [evt>]]
             [reagent.core :as reagent]))
 
