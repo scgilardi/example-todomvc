@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.todo-edit
   "# Todo Edit component"
-  (:require [sazhet.ui :refer [<cmd <comp sub> on-key> on-value>]
+  (:require [sazhet.ui :refer [<cmd <comp sub> key> save> <value]
              :refer-macros [evt>]]
             [reagent.core :as reagent]))
 
@@ -27,15 +27,15 @@
   [ctx]
   (let [edit-todo (sub> ctx :edit-todo)
         todo-title (reagent/atom (:title edit-todo))
-        update (evt> (<cmd ctx :confirm-edit
-                           (assoc edit-todo :title @todo-title)))
+        update (evt> (let [updated (assoc edit-todo :title @todo-title)]
+                       (<cmd ctx :confirm-edit updated)))
         cancel (evt> (<cmd ctx :cancel-edit))
         render (fn []
                  [:input.edit {:value @todo-title
                                :on-blur update
-                               :on-change (on-value> todo-title)
-                               :on-key-down (on-key> :enter update
-                                                     :escape cancel)}])
+                               :on-change (save> <value todo-title)
+                               :on-key-down (key> :enter update
+                                                  :escape cancel)}])
         focus-input #(let [node (reagent/dom-node %)
                            length (count (.-value node))]
                        (.focus node)

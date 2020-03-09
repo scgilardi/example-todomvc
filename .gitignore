@@ -7,4 +7,5 @@
 /*-init.clj
 /*.log
 /.rebel_readline_history
+/.shadow-cljs
 out

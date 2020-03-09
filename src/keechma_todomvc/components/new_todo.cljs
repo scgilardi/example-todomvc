@@ -1,6 +1,6 @@
 (ns keechma-todomvc.components.new-todo
   "# New Todo component"
-  (:require [sazhet.ui :refer [<cmd <comp on-key> on-value>]
+  (:require [sazhet.ui :refer [<cmd <comp key> save> <value]
              :refer-macros [evt>]]
             [reagent.core :as reagent]))
 
@@ -21,15 +21,16 @@
   not present. The local state can be used by the code in the `inner`
   render function. It will persist until the component is unmounted."
   [ctx]
-  (let [new-title (reagent/atom "")]
+  (let [new-title (reagent/atom "")
+        create (evt> (<cmd ctx :create-todo @new-title)
+                     (reset! new-title ""))]
     (fn []
       [:input.new-todo
        {:placeholder "What needs to be done?"
         :value @new-title
         :auto-focus true
-        :on-key-down (on-key> :enter (evt> (<cmd ctx :create-todo @new-title)
-                                           (reset! new-title "")))
-        :on-change (on-value> new-title)}])))
+        :on-change (save> <value new-title)
+        :on-key-down (key> :enter create)}])))
 
 (def component
   (<comp :renderer form-2-render))
